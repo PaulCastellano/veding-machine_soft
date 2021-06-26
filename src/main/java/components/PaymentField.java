@@ -3,6 +3,7 @@ package components;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
@@ -34,19 +35,16 @@ public class PaymentField extends JPanel {
         enteredPayment.setText(enteredText + 0);
 
         selectButton.setText(buttonText);
-        selectButton.addActionListener(new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if ((paymentSelected.getText().equals("Money") || paymentSelected.getText().isEmpty()) && money <= 0) {
-                    JOptionPane.showMessageDialog(new Frame(),
-                            "Please enter money",
-                            "ERROR",
-                            JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
-                if (fieldInterface != null)
-                    fieldInterface.onClick(paymentSelected.getText());
+        selectButton.addActionListener(e -> {
+            if ((paymentSelected.getText().equals("Money") || paymentSelected.getText().isEmpty()) && money <= 0) {
+                JOptionPane.showMessageDialog(new Frame(),
+                        "Please enter money",
+                        "ERROR",
+                        JOptionPane.ERROR_MESSAGE);
+                return;
             }
+            if (fieldInterface != null)
+                fieldInterface.onClick(paymentSelected.getText());
         });
 
         paymentSelected.addFocusListener(new FocusListener() {

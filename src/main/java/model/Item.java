@@ -56,7 +56,7 @@ public class Item {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Item item = (Item) o;
-        return Objects.equals(name, item.name);
+        return Objects.equals(name.toLowerCase().trim(), item.name.toLowerCase().trim());
     }
 
     @Override
