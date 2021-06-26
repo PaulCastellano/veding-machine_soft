@@ -4,6 +4,7 @@ import screens.MainScreen;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Locale;
 
 public class Application {
 
@@ -13,9 +14,10 @@ public class Application {
         verifyExistingConfigFile();
         addNewData();
 
-        new MainScreen(Utils.TITLE, repository);
-
-        repository.saveData();
+        if (repository.getData() != null) {
+            new MainScreen(Utils.TITLE, repository);
+            repository.saveData();
+        }
     }
 
     private void verifyExistingConfigFile() {
@@ -29,6 +31,8 @@ public class Application {
     private void addNewData() {
         while (repository.getData() == null) {
             String s = JOptionPane.showInputDialog("Enter the file path with data");
+            if (s.toLowerCase().equals("close"))
+                break;
             try {
                 repository.setNewDataFromFile(s);
                 repository.saveData();

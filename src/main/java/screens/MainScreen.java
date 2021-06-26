@@ -85,12 +85,14 @@ public class MainScreen extends MainFrame implements PaymentFieldInterface, Admi
     }
 
     private void addData(Data data) {
-        viewProduct.replaceData(data);
-        for (int i = 0; i <= Integer.parseInt(data.getConfig().getColumns()); i++) {
-            if (i == 0) {
-                table.getColumn("Row/Column").setCellRenderer(new TextTableRenderer());
-            } else {
-                table.getColumn(String.valueOf(i)).setCellRenderer(new TextTableRenderer());
+        if (data != null) {
+            viewProduct.replaceData(data);
+            for (int i = 0; i <= Integer.parseInt(data.getConfig().getColumns()); i++) {
+                if (i == 0) {
+                    table.getColumn("Row/Column").setCellRenderer(new TextTableRenderer());
+                } else {
+                    table.getColumn(String.valueOf(i)).setCellRenderer(new TextTableRenderer());
+                }
             }
         }
     }
